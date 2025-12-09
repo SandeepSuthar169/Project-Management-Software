@@ -201,10 +201,7 @@ const updateProject = asyncHandler(async (req, res) => {
 
 const deleteProject = asyncHandler(async (req, res) => {
     const { projectId } = req.params
-    console.log("User ID:+=+=+=>", req.user._id);
 
-    console.log("project ID:+=+=+=>",projectId);
-    
 
     if(!projectId)  throw new ApiError(404, "Project Id is required")
 
@@ -215,12 +212,7 @@ const deleteProject = asyncHandler(async (req, res) => {
     const project = await Project.findById(projectId);
     console.log("Found in Project collection:", project);
 
-    // const projectExists = await Project.findById(projectId);
-    // console.log("Project exists:", projectExists);
-    
-    // if(!projectExists) {
-    //     throw new ApiError(404, "Project not found");
-    // }
+ 
 
     const delProject = await Project.findOneAndDelete({ _id: projectId })
     console.log(projectId);  

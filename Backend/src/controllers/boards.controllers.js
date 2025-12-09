@@ -137,7 +137,7 @@ const updateBoard  = asyncHandler(async(req, res) => {
         startDate, 
         endDate
     }  = req.body
-    
+
     if(
         !tags || 
         !prioripy || 
@@ -193,6 +193,18 @@ const updateBoard  = asyncHandler(async(req, res) => {
 
 
 const deleteBoard  = asyncHandler(async(req, res) => {
+
+    const { boardId } = req.params
+    if(!boardId) throw new ApiError(402, "board Id is required")
+
+    const deleBoard = await Board.findByIdAndDelete(boardId)
+    if(!deleBoard) throw new ApiError(402, "deleBoard is required")
+
+    return res.status(200).json(new ApiResponse(
+        200, 
+        deleBoard, 
+        "delete board successfully"
+    ))
 
 })
 

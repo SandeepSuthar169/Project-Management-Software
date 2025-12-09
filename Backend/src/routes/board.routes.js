@@ -13,6 +13,7 @@ router.route("/createBoard/:userId").post(createBoard)
 router.route("/getBoard/:boardId").get(getBoard)
 router.route("/getAllBoard/:userId").get(getAllBoard)
 router.route("/updateBoard/:userId/:boardId").post(updateBoard)
+router.route("/deleteBoard/:boardId").delete(deleteBoard)
 
 
 export default router
