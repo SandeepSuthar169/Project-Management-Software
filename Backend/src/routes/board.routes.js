@@ -3,7 +3,6 @@ import {
     createBoard,
     getBoard,
     getAllBoard,
-    getBoardById,
     updateBoard,
     deleteBoard,
 
@@ -11,6 +10,7 @@ import {
 const router = Router()
 
 router.route("/createBoard/:userId").post(createBoard)
+router.route("/getBoard/:boardId").post(getBoard)
 
 
 export default router

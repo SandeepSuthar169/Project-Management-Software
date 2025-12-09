@@ -38,22 +38,38 @@ const createBoard = asyncHandler(async(req, res) => {
         )
     )
 
-
-
-    })
+})
 
 
 const getBoard = asyncHandler(async(req, res) => {
+
+    const { boardId } = req.params
+    if(!boardId) throw new ApiError(402, "board Id is required")
+  
+
+    const board = await Board.findById(boardId)
+
+    
+    if(!board) throw new ApiError(402, "board is required")
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            board,
+            "board fetch successfully!"
+                
+        )
+    )
 
 })
 
 const getAllBoard = asyncHandler(async(req, res) => {
 
-})
 
-const getBoardById = asyncHandler(async(req, res) => {
 
 })
+
+
 
 
 const updateBoard  = asyncHandler(async(req, res) => {
@@ -70,7 +86,6 @@ export {
     createBoard,
     getBoard,
     getAllBoard,
-    getBoardById,
     updateBoard,
     deleteBoard
 }
