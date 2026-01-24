@@ -1,8 +1,9 @@
 import React from 'react'
 import Cards from './Ui/Cards.jsx'
-import Footer from './share/Footer.jsx'
+import Footer from './Ui/Footer.jsx'
 import HeroSection from './Ui/HeroSection.jsx'
-import Navbar from './share/Navbar.jsx'
+import Navbar from './Ui/Navbar.jsx'
+import Line from './Ui/Line.jsx'
 
 
 function Home() {
@@ -11,6 +12,7 @@ function Home() {
       <div>
         <Navbar/>
         <HeroSection/>
+        <Line/>
         <Cards/>
         <Footer/>
       </div>

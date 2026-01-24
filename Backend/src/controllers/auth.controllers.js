@@ -7,7 +7,6 @@ import { asyncHandler } from "../utils/async-handler.js"
 // import { verifyJWT } from "../middlewares/auth.middleware.js"
 
 
-
 const registerUser = asyncHandler(async (req, res) => {
         //1. get user details from fronted
 

@@ -3,7 +3,7 @@ import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 function HeroSection() {
   return (
-    <section className="w-full bg-[oklch(95.4%_0.038_75.164)]  text-white py-16">
+    <section className="w-full bg-amber-100  text-white py-16">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-2 gap-10 items-center">
           
@@ -45,53 +45,53 @@ function HeroSection() {
 
         </div>
       </div>
-      <div class="w-full flex justify-center px-4 sm:px-6 lg:px-8 mt-10">
-        <ul class="max-w-3xl">
-          <li class="text-center sm:text-left text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">Join the 
-            <span class="font-semibold">300,000+</span> customers that power team collaboration with <span class="font-semibold text-blue-600">
+      <div className="w-full flex justify-center px-4 sm:px-6 lg:px-8 mt-10">
+        <ul className="max-w-3xl">
+          <li className="text-center sm:text-left text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">Join the 
+            <span className="font-semibold">300,000+</span> customers that power team collaboration with <span className="font-semibold text-blue-600">
               Atlassian
             </span>
           </li>
          </ul>
       </div>
-      <div class="w-full py-8 px-4 sm:px-6 lg:px-12">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
+      <div className="w-full py-8 px-4 sm:px-6 lg:px-12">
+  <div className="max-w-6xl mx-auto">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
       
       <img
         src="https://dam-cdn.atl.orangelogic.com/AssetLink/q12105gpgq24dax7m0y2dww8m2lww0mp/fl_keep_metadata/logo-strava.svg"
         alt="Strava"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
       <img
         src="https://dam-cdn.atl.orangelogic.com/AssetLink/658vw3s1k5w08l30a12423yubi22ttg2/fl_keep_metadata/CSD-9732_Customer-Logo-Square.webp"
         alt="Customer"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
       <img
         src="https://dam-cdn.atl.orangelogic.com/AssetLink/yfboqb04f58iu8j06qn75uys682ak30g/fl_keep_metadata/logo-AMD.svg"
         alt="AMD"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
       <img
         src="https://dam-cdn.atl.orangelogic.com/AssetLink/g26n5u77y20b0aes11621wt5x0fk2wj5/fl_keep_metadata/logo-venmo.svg"
         alt="Venmo"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
       <img
         src="https://cdn.prod.website-files.com/63bd15a406b2101a5dbb3e8f/65f0151a95f7f97e1b1ee891_Coca-Cola.svg"
         alt="Coca-Cola"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
       <img
         src="https://cdn.prod.website-files.com/63bd15a406b2101a5dbb3e8f/65f0151b631873adc71179f3_BD.avif"
         alt="BD"
-        class="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
+        className="h-8 sm:h-10 md:h-12 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition"
       />
 
     </div>
