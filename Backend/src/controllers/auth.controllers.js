@@ -198,8 +198,24 @@ const logoutUser = asyncHandler(async (req, res) => {
 })
 
 
+const check = asyncHandler(async (req, res) => {
+    try {
+        res.status(200).json({
+            success: true,
+            message: "User authenticated successfully",
+            user: req.user
+        });
+    } catch (error) {
+        console.error("error checking user: ", error);
+        res.status(500).json({
+            error: 'Error Checking user'
+        })
+    }
+})
+
 export {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    check
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 // import Cards from './Pages/Cards.js'
-import Footer from './Pages/Footer.jsx'
-import HeroSection from './Pages/HeroSection.jsx'
-import Navbar from './Pages/Navbar.jsx'
-import Line from './Pages/Line.jsx'
-import SecoundHeroSection from './Pages/SecoundHeroSection.jsx'
+import Footer from './Footer.jsx'
+import HeroSection from './HeroSection.jsx'
+import Navbar from './Navbar.jsx'
+import Line from './Line.jsx'
+import SecoundHeroSection from './SecoundHeroSection.jsx'
 
 function Home() {
   return (

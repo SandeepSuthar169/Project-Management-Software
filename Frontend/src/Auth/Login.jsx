@@ -14,27 +14,32 @@ import {
 
 import {email, z} from 'zod';
 
-const signupSchema = z.object(
+const loginSchema = z.object(
   {
     email:z.string().email("Enter a valid email"),
     password:z.string().min(5, "passowd must b atleast of 5 characters"),
-    name:z.string().min(3, "Name must be atleast 3 characters")
   }
 )
 
 
-function Signup() {
+function Login() {
 
   const [showPassword, setShowPassword] = useState(false)
+ 
 
   const { register, handleSubmit, formState: {errors} } = useForm(
     {
-      resolver:zodResolver(signupSchema)
+      resolver:zodResolver(loginSchema)
     }
   )
 
   const onSubmit = async(data) =>{ 
-    console.log(data)
+    try {
+      await login(data)
+      
+    } catch (error) {
+      console.error("Signup failed" , error)
+    }
   }
 
   return (
@@ -54,29 +59,7 @@ function Signup() {
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        
-        {/* name */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text font-medium">Name</span>
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Code className="h-5 w-5 text-base-content/40" />
-            </div>
-            <input
-              type="text"
-              {...register("name")}
-              className={`input input-bordered w-full pl-10 ${
-                errors.name ? "input-error" : ""
-              }`}
-              placeholder="John Doe"
-            />
-          </div>
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-          )}              
-        </div>
+
 
         {/* Email */}
         <div className="form-control">
@@ -148,7 +131,7 @@ function Signup() {
             </>
           ) : (
             )} */}
-            "Sign in"
+            "Login"
         </button>
       </form>
 
@@ -157,7 +140,7 @@ function Signup() {
         <p className="text-base-content/60">
           Already have an account?{" "}
           <Link to="/login" className="link link-primary">
-            Sign in
+            Login
           </Link>
         </p>
       </div>
@@ -175,4 +158,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default Login
