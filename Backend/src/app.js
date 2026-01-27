@@ -1,4 +1,3 @@
-import express from "express"
 import cookieparser from "cookie-parser"
 import cors from "cors"
 import authRoute from "./routes/auth.routes.js"
@@ -11,6 +10,7 @@ import boardRoute from "./routes/board.routes.js"
 import todoRoute from "./routes/todo.routes.js"
 import projectDocsRoute from "./routes/projectDocs.routes.js"
 
+import express from "express"
 const app = express()
 
 app.use(cors({

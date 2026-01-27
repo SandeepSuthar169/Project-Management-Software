@@ -15,9 +15,9 @@ import { useAuthStore } from "../store/useAuthStore.js"
 
 const signupSchema = z.object(
   {
-    email:z.string().email("Enter a valid email"),
-    password:z.string().min(5, "passowd must b atleast of 5 characters"),
-    name:z.string().min(3, "Name must be atleast 3 characters")
+    email: z.string().email("Enter a valid email"),
+    password: z.string().min(5, "password must be at least 5 characters"),
+    username: z.string().min(3, "Username must be at least 3 characters") 
   }
 )
 
@@ -73,15 +73,15 @@ function Signup() {
             </div>
             <input
               type="text"
-              {...register("name")}
+              {...register("username")}
               className={`input input-bordered w-full pl-10 ${
-                errors.name ? "input-error" : ""
+                errors.username ? "input-error" : ""
               }`}
               placeholder="John Doe"
             />
           </div>
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          {errors.username && (
+            <p className="text-red-500 text-sm mt-1">{errors.username.message}</p>
           )}              
         </div>
 
