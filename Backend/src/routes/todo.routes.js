@@ -1,19 +1,17 @@
-import { Router } from "express";
-import {   
-    createTodo,
-    getTodo,
-    getAllTodo,
-    updateTodo,
-    deleteTodo,
-} from "../controllers/todo.controllers.js"
+import express from "express";
+import {
+  createTodo,
+  deleteTodo,
+  getTodos,
+  updateTodo,
+} from "../controller/todo.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js"
 
-const router = Router()
+const router = express.Router();
 
-router.route("/createTodo/:userId").post(createTodo)
-router.route("/getTodo/:todoId").get(getTodo)
-router.route("/getAllTodo/:userId").get(getAllTodo)
-router.route("/updateTodo/:userId/:todoId").post(updateTodo)
-router.route("/deleteTodo/:todoId").delete(deleteTodo)
+router.post("/create", verifyJWT, createTodo);
+router.get("/fetch", verifyJWT, getTodos);
+router.put("/update/:id", verifyJWT, updateTodo);
+router.delete("/delete/:id", verifyJWT, deleteTodo);
 
-
-export default router
+export default router;

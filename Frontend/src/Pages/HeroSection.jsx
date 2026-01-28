@@ -1,5 +1,6 @@
 import React from "react";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { Navigate } from "react-router-dom";
 
 function HeroSection() {
   return (
@@ -30,7 +31,7 @@ function HeroSection() {
               </p>
             </div>
 
-            <button className="bg-pink-500 hover:bg-pink-600 transition px-6 py-3 rounded-md font-semibold w-fit shadow-lg">
+            <button  className="bg-pink-500 hover:bg-pink-600 transition px-6 py-3 rounded-md font-semibold w-fit shadow-lg">
               Get Started
             </button>
           </div>

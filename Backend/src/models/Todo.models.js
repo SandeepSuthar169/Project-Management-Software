@@ -30,11 +30,7 @@ const TodoSchema = new Schema(
             type: Date,
             required: false
         },
-        assignBy: {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-            required: true
-        },
+
         description: {
             type: String,
             require: true
