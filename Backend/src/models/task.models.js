@@ -10,12 +10,12 @@ const taskSchema = new Schema(
         description: {
             type: String
         },        
-        project: {
-            type: Schema.Types.ObjectId,
-            ref: "Project",
-            required: true
+        // project: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: "Project",
+        //     required: true
             // required: [true, "Project ref is requires"]
-        },
+        // },
         assignedTo: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -24,7 +24,7 @@ const taskSchema = new Schema(
         assignedBy: {
             type: Schema.Types.ObjectId,
             ref: "User",
-            required: true,
+            // required: true,
         },
         status: {
             type: String,

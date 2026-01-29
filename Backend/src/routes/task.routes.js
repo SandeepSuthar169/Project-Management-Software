@@ -16,7 +16,7 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router()
 
 // ================= Task ===================
-router.route("/createTask").post(verifyJWT, createTask)  // 1
+router.route("/createTask").post(createTask)  // 1
 router.route("/getTasksById/:taskId").get(verifyJWT,getTasksById)  // 4
 router.route("/updateTask/:taskId").post(verifyJWT,updateTask)  // 2
 router.route("/deleteTask/:taskId").delete(verifyJWT, deleteTask)  // 3

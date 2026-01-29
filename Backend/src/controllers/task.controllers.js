@@ -9,62 +9,39 @@ import { ApiResponse } from "../utils/api-response.js"
 import { asyncHandler } from "../utils/async-handler.js"
 import { AvailableTaskStatuses, AvailableUserRoles } from "../utils/constants.js"
 
+
 const createTask = asyncHandler(async(req, res) =>{
-    //1. find project
+    // 1. Get data from request body
     const { title, description, status } = req.body
 
-    // console.log(assignedTo );
-    if(!title || !description || !status)  throw new ApiError(404, "user info not found!")
+    // 2. Validate required fields - use 400 instead of 404
+    if(!title || !description || !status) {
+        throw new ApiError(400, "Title, description, and status are required!")
+    }
     
-    
-    // const { userId } =  req.params 
-    // console.log(userId);
-    
-    // if(!userId) throw new ApiError(401, "user id is required")
-
-    // const user = await User.findById(userId)
-    // if(!user) throw new ApiError(401, "user  is required")
-
-
-    // const { projectId } = req.params
-    // console.log(projectId);
-    
-    // if(!projectId) throw new ApiError(401, "projectId  is required")
-
-    // const  project  = await Project.findById(projectId)
-    // if(!project)  throw new ApiError(404, "project not found!")
-    //3. get the files form req.files
-
-    // const files = req.files || []
-
-    // if(!files)  throw new ApiError(404, "files not found!")
-    // //4. create affachments
-
-    // const attachments = files.map((file) => {
-    //     return {
-    //         url: `${process.env.BASE_URL}/images/${file.filename}`,
-    //         mimetype: file.mimetype,
-    //         size: file.size
+    // 3. Validate status is one of the allowed values
+    // if(!AvailableTaskStatuses.includes(status)) {
+    //     throw new ApiError(400, `Invalid status. Must be one of: ${AvailableTaskStatuses.join(', ')}`)
     // }
-    // })
-
-    // if(!attachments) throw new ApiError(404, "files not found!")
-    // //5. create task
-
+  
+    // 4. Create task
     const task = await Task.create({
         title,
         description,
-        // project: projectId,
-        assignedBy: req.user._id,
+        assignedBy: req.user._id, 
         assignedTo: req.user._id,
         status,
-        // attachments
     })
 
-    if(!task) throw new ApiError(404, "failed to ceate task")
-    //6. return successfully
-
-    return res.status(201).json(new ApiResponse(201, task, "task create successfully"))
+    // 5. Check if task was created - use 500 instead of 404
+    if(!task) {
+        throw new ApiError(500, "Failed to create task")
+    }
+    
+    // 6. Return successfully
+    return res.status(201).json(
+        new ApiResponse(201, task, "Task created successfully")
+    )
 })
 
 
@@ -153,7 +130,7 @@ const getTasksById = asyncHandler(async(req, res) =>{
         if(!task)  throw new ApiError(404, "task not found!")
         
           await redis.set(
-            `book:${taskId}`,
+            `task:${taskId}`,
             JSON.stringify(task),
             "EX",
             3600
