@@ -9,7 +9,7 @@ export const useTodoStore = create((set) => ({
   getTodos: async () => {
     set({ loading: true });
     try {
-      const res = await axiosInstance.get("/todo/fetch"); 
+      const res = await axiosInstance.get("/todo/fetch");
       set({ todos: res.data.todos, loading: false });
     } catch (error) {
       console.error("Error fetching todos:", error);
@@ -20,7 +20,14 @@ export const useTodoStore = create((set) => ({
 
   createTodo: async (data) => {
     try {
-      const res = await axiosInstance.post("/todo/create", data); 
+      const todoData = {
+        text: data.text,
+        completed: data.completed || false,
+        status: data.status || "TO DO",
+        projectId: data.projectId || "project1",
+      };
+
+      const res = await axiosInstance.post("/todo/create", todoData);
       set((state) => ({
         todos: [...state.todos, res.data.newTodo],
       }));
@@ -33,7 +40,7 @@ export const useTodoStore = create((set) => ({
 
   updateTodo: async (id, data) => {
     try {
-      const res = await axiosInstance.put(`/todo/update/${id}`, data); 
+      const res = await axiosInstance.put(`/todo/update/${id}`, data);
       set((state) => ({
         todos: state.todos.map((t) => (t._id === id ? res.data.todo : t)),
       }));
@@ -46,7 +53,7 @@ export const useTodoStore = create((set) => ({
 
   deleteTodo: async (id) => {
     try {
-      await axiosInstance.delete(`/todo/delete/${id}`); 
+      await axiosInstance.delete(`/todo/delete/${id}`);
       set((state) => ({
         todos: state.todos.filter((t) => t._id !== id),
       }));
@@ -54,6 +61,26 @@ export const useTodoStore = create((set) => ({
     } catch (error) {
       console.error("Error deleting todo:", error);
       toast.error(error.response?.data?.message || "Failed to delete todo");
+    }
+  },
+
+  reorderTodos: (reorderedTodos) => {
+    set({ todos: reorderedTodos });
+  },
+
+  moveTodo: async (id, newStatus, newProjectId) => {
+    try {
+      const updateData = {};
+      if (newStatus) updateData.status = newStatus;
+      if (newProjectId) updateData.projectId = newProjectId;
+
+      const res = await axiosInstance.put(`/todo/update/${id}`, updateData);
+      set((state) => ({
+        todos: state.todos.map((t) => (t._id === id ? res.data.todo : t)),
+      }));
+    } catch (error) {
+      console.error("Error moving todo:", error);
+      toast.error(error.response?.data?.message || "Failed to move todo");
     }
   },
 }));

@@ -1,11 +1,11 @@
 import express from "express";
 import {
   createTodo,
-  deleteTodo,
   getTodos,
   updateTodo,
+  deleteTodo,
 } from "../controllers/todo.controllers.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js"
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

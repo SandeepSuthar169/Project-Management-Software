@@ -1,26 +1,33 @@
-import mongoose, { Mongoose, Schema } from "mongoose";
-import {
-    TodoStatusEnum,
-    AvailableTodoStatuses ,
-    TodoPriority,
-    AvailableTodoPriority
-} from "../utils/constants.js"
+import mongoose from "mongoose";
 
-const TodoSchema = new Schema(
-    {
-        text: {
-            type: String,
-            require: true
-        },
-        completed: {
-            type: String,
-            require: true
-        },
-        
+const todoSchema = new mongoose.Schema(
+  {
+    text: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps: true
-    }
-)
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: String,
+      enum: ["TO DO", "IN PROGRESS", "DONE"],
+      default: "TO DO",
+    },
+    projectId: {
+      type: String,
+      default: "project1",
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-export  const Todo = mongoose.model("Todo", TodoSchema)
+const Todo = mongoose.model("Todo", todoSchema);
+
+export default Todo;
