@@ -6,81 +6,61 @@ export const useTodoStore = create((set) => ({
   todos: [],
   loading: false,
 
-  getTodos: async () => {
+  // Fetch all todos
+  fetchTodos: async () => {
     set({ loading: true });
     try {
-      const res = await axiosInstance.get("/todo/fetch");
-      set({ todos: res.data.todos, loading: false });
+      const response = await axiosInstance.get("/todo/fetch");
+      set({ todos: response.data.todos, loading: false });
     } catch (error) {
-      console.error("Error fetching todos:", error);
-      toast.error(error.response?.data?.message || "Failed to fetch todos");
+      toast.error("Failed to load todos");
       set({ loading: false });
     }
   },
 
-  createTodo: async (data) => {
+  // Add new todo
+  addTodo: async (text) => {
     try {
-      const todoData = {
-        text: data.text,
-        completed: data.completed || false,
-        status: data.status || "TO DO",
-        projectId: data.projectId || "project1",
-      };
-
-      const res = await axiosInstance.post("/todo/create", todoData);
+      const response = await axiosInstance.post("/todo/create", {
+        text,
+        completed: false,
+      });
       set((state) => ({
-        todos: [...state.todos, res.data.newTodo],
+        todos: [...state.todos, response.data.newTodo],
       }));
-      toast.success("Todo created successfully");
+      toast.success("Todo added!");
     } catch (error) {
-      console.error("Error creating todo:", error);
-      toast.error(error.response?.data?.message || "Failed to create todo");
+      toast.error("Failed to add todo");
     }
   },
 
-  updateTodo: async (id, data) => {
+  // Toggle todo completion
+  toggleTodo: async (id) => {
+    const todo = useTodoStore.getState().todos.find((t) => t._id === id);
     try {
-      const res = await axiosInstance.put(`/todo/update/${id}`, data);
+      const response = await axiosInstance.put(`/todo/update/${id}`, {
+        completed: !todo.completed,
+      });
       set((state) => ({
-        todos: state.todos.map((t) => (t._id === id ? res.data.todo : t)),
+        todos: state.todos.map((t) =>
+          t._id === id ? response.data.todo : t
+        ),
       }));
-      toast.success("Todo updated successfully");
     } catch (error) {
-      console.error("Error updating todo:", error);
-      toast.error(error.response?.data?.message || "Failed to update todo");
+      toast.error("Failed to update todo");
     }
   },
 
+  // Delete todo
   deleteTodo: async (id) => {
     try {
       await axiosInstance.delete(`/todo/delete/${id}`);
       set((state) => ({
         todos: state.todos.filter((t) => t._id !== id),
       }));
-      toast.success("Todo deleted successfully");
+      toast.success("Todo deleted");
     } catch (error) {
-      console.error("Error deleting todo:", error);
-      toast.error(error.response?.data?.message || "Failed to delete todo");
-    }
-  },
-
-  reorderTodos: (reorderedTodos) => {
-    set({ todos: reorderedTodos });
-  },
-
-  moveTodo: async (id, newStatus, newProjectId) => {
-    try {
-      const updateData = {};
-      if (newStatus) updateData.status = newStatus;
-      if (newProjectId) updateData.projectId = newProjectId;
-
-      const res = await axiosInstance.put(`/todo/update/${id}`, updateData);
-      set((state) => ({
-        todos: state.todos.map((t) => (t._id === id ? res.data.todo : t)),
-      }));
-    } catch (error) {
-      console.error("Error moving todo:", error);
-      toast.error(error.response?.data?.message || "Failed to move todo");
+      toast.error("Failed to delete todo");
     }
   },
 }));
